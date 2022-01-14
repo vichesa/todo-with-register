@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+.App .home {
+  width: 75vw;
+}
+
+.add-todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-todo p {
+  padding: 8px;
+}
+
+.add-todo input {
+  color: #2c2c29;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 200px;
+  padding: 5px;
+  text-align: center;
+  margin: 25px;
+}
+
+.add-todo button {
+  padding: 12px 24px;
+  border: none;
+  background-color: rgb(0, 161, 112);
+  color: white;
+}
+.add-todo button:hover {
+  padding: 12px 24px;
+  border: none;
+  background-color: rgb(0, 161, 112);
+  color: white;
+  opacity: 0.9;
+}
+
+.todo-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-list h3 {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 400px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.delete-btn {
+  padding: 8px;
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  margin: 20px;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+.todo,
+.deleted-todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  margin: 10px;
+}
+
+.todo span {
+  width: 100%;
+  margin: 0 4px;
+  border-bottom: 1px solid rebeccapurple;
+}
+
+.todo button {
+  padding: 4px 8px;
+  background-color: grey;
+  color: white;
+  border: none;
+}
+
+.todo button:hover {
+  background-color: darkred;
+}
+
+.deleted-todo {
+  padding: 0px;
+}
+
+.deleted-todo button {
+  padding: 8px;
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.deleted-todo button:hover {
+  opacity: 0.9;
+}
+
+.note {
+  box-sizing: border-box;
+  border: black;
+}
