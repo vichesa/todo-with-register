@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "./LoginForm.css";
-import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
-import { withRouter } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import './LoginForm.css';
+import { API_BASE_URL, ACCESS_TOKEN_NAME } from '../../constants/apiConstants';
+import { withRouter } from 'react-router-dom';
 
 function LoginForm(props) {
   const [state, setState] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     successMessage: null,
   });
   const handleChange = (e) => {
@@ -21,33 +21,32 @@ function LoginForm(props) {
   const handleSubmitClick = (e) => {
     e.preventDefault();
     const payload = {
-      grant_type: "password",
-      client_id: "",
-      client_secret: "",
+      grant_type: 'password',
+      client_id: '',
+      client_secret: '',
       username: state.email,
       password: state.password,
-      scope: "*",
+      scope: '*',
     };
 
     var formdata = new FormData();
-    formdata.append("grant_type", "password");
-    formdata.append("client_id", "");
-    formdata.append("client_secret", "");
-    formdata.append("email", "farizalhamami@gmail.com");
-    formdata.append("password", "qwerty123s");
-    formdata.append("scope", "*");
+    formdata.append('grant_type', 'password');
+    formdata.append('client_id', '');
+    formdata.append('client_secret', '');
+    formdata.append('email', 'farizalhamami@gmail.com');
+    formdata.append('password', 'qwerty123s');
+    formdata.append('scope', '*');
 
     var requestOptions = {
-        headers: { 'content-type': 'multipart/form-data' },
-    //   method: "POST",
-    //   body: formdata,
-      redirect: "follow",
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
     };
-    console.log(formdata)
-    fetch("https://accounts.tujjudemo.com/api/oauth/token", requestOptions)
+    console.log(formdata);
+    fetch('https://accounts.tujjudemo.com/api/oauth/token', requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log('error', error));
     // axios
     //   .post(API_BASE_URL + "/api/oauth/token", formdata, requestOptions)
     //   .then(function (response) {
@@ -71,18 +70,20 @@ function LoginForm(props) {
     //   });
   };
   const redirectToHome = () => {
-    props.updateTitle("Home");
-    props.history.push("/home");
+    props.updateTitle('Home');
+    props.history.push('/home');
   };
   const redirectToRegister = () => {
-    props.history.push("/register");
-    props.updateTitle("Register");
+    props.history.push('/register');
+    props.updateTitle('Register');
   };
   return (
     <div className="card p-4 col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left mb-2">
-          <label className="mb-1" htmlFor="exampleInputEmail1">Email address</label>
+          <label className="mb-1" htmlFor="exampleInputEmail1">
+            Email address
+          </label>
           <input
             type="email"
             className="form-control"
@@ -94,7 +95,9 @@ function LoginForm(props) {
           />
         </div>
         <div className="form-group text-left mb-2">
-          <label className="mb-1" htmlFor="exampleInputPassword1">Password</label>
+          <label className="mb-1" htmlFor="exampleInputPassword1">
+            Password
+          </label>
           <input
             type="password"
             className="form-control"
@@ -115,7 +118,7 @@ function LoginForm(props) {
       </form>
       <div
         className="alert alert-success mt-2"
-        style={{ display: state.successMessage ? "block" : "none" }}
+        style={{ display: state.successMessage ? 'block' : 'none' }}
         role="alert"
       >
         {state.successMessage}
