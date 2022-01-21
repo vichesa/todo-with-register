@@ -22,22 +22,25 @@ function LoginForm(props) {
     e.preventDefault();
     const payload = {
       grant_type: 'password',
-      client_id: '',
-      client_secret: '',
-      username: state.email,
+      client_id: '7b48f795-a4b1-4506-8f48-d955935e4002',
+      client_secret: 'demo-secret',
+      username: state.usernama,
       password: state.password,
       scope: '*',
     };
 
     var formdata = new FormData();
     formdata.append('grant_type', 'password');
-    formdata.append('client_id', '');
-    formdata.append('client_secret', '');
-    formdata.append('email', 'farizalhamami@gmail.com');
+    formdata.append('client_id', '7b48f795-a4b1-4506-8f48-d955935e4002');
+    formdata.append('client_secret', 'demo-secret');
+    formdata.append('username', 'farizalhamami@gmail.com');
     formdata.append('password', 'qwerty123s');
     formdata.append('scope', '*');
 
     var requestOptions = {
+      Headers: {
+        'Content-Type': 'multipart/form-data',
+      },
       method: 'POST',
       body: formdata,
       redirect: 'follow',
