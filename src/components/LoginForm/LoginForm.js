@@ -34,13 +34,10 @@ function LoginForm(props) {
     formdata.append('client_id', '7b48f795-a4b1-4506-8f48-d955935e4002');
     formdata.append('client_secret', 'demo-secret');
     formdata.append('username', 'farizalhamami@gmail.com');
-    formdata.append('password', 'qwerty123s');
+    formdata.append('password', 'qwerty123');
     formdata.append('scope', '*');
 
     var requestOptions = {
-      Headers: {
-        'Content-Type': 'multipart/form-data',
-      },
       method: 'POST',
       body: formdata,
       redirect: 'follow',
