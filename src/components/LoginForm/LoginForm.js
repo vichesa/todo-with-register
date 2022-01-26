@@ -3,6 +3,7 @@ import axios from 'axios';
 import './LoginForm.css';
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from '../../constants/apiConstants';
 import { withRouter } from 'react-router-dom';
+import { result } from 'lodash';
 
 function LoginForm(props) {
   const [state, setState] = useState({
@@ -24,7 +25,7 @@ function LoginForm(props) {
       grant_type: 'password',
       client_id: '7b48f795-a4b1-4506-8f48-d955935e4002',
       client_secret: 'demo-secret',
-      username: state.usernama,
+      username: state.username,
       password: state.password,
       scope: '*',
     };
@@ -33,8 +34,8 @@ function LoginForm(props) {
     formdata.append('grant_type', 'password');
     formdata.append('client_id', '7b48f795-a4b1-4506-8f48-d955935e4002');
     formdata.append('client_secret', 'demo-secret');
-    formdata.append('username', 'farizalhamami@gmail.com');
-    formdata.append('password', 'qwerty123');
+    formdata.append('username', state.email);
+    formdata.append('password', state.password);
     formdata.append('scope', '*');
 
     var requestOptions = {
@@ -42,33 +43,45 @@ function LoginForm(props) {
       body: formdata,
       redirect: 'follow',
     };
-    console.log(formdata);
     fetch('https://accounts.tujjudemo.com/api/oauth/token', requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => localStorage.setItem('ACCESS_TOKEN_NAME', result)).then(
+        check()
+      )
       .catch((error) => console.log('error', error));
     // axios
-    //   .post(API_BASE_URL + "/api/oauth/token", formdata, requestOptions)
-    //   .then(function (response) {
-    //     console.log("login", response);
-    //     if (response.status === 200) {
-    //       setState((prevState) => ({
-    //         ...prevState,
-    //         successMessage: "Login successful. Redirecting to home page..",
-    //       }));
-    //       localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
-    //       redirectToHome();
-    //       props.showError(null);
-    //     } else if (response.code === 204) {
-    //       props.showError("Username and password do not match");
-    //     } else {
-    //       props.showError("Username does not exists");
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+      // .post(API_BASE_URL + "/api/oauth/token", requestOptions)
+      // .then(function (response) {
+      //   console.log("login", response);
+      //   if (response.status === 200) {
+      //     setState((prevState) => ({
+      //       ...prevState,
+      //       successMessage: "Login successful. Redirecting to home page..",
+      //     }));
+      //     localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
+      //     redirectToHome();
+      //     props.showError(null);
+      //   } else if (response.code === 204) {
+      //     props.showError("Username and password do not match");
+      //   } else {
+      //     props.showError("Username does not exists");
+      //   }
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
   };
+
+  const check = () => {
+    var resp = JSON.parse(localStorage.getItem('ACCESS_TOKEN_NAME'))
+    console.log('res',resp)
+    if(resp.status.code == 200){
+      redirectToHome()
+    }else{
+      props.showError('Unauthorized : email or password wrong')
+      
+    }
+  }
   const redirectToHome = () => {
     props.updateTitle('Home');
     props.history.push('/home');
